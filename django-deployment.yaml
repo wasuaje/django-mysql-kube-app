@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name: app-django-mysql 
-        image: wasuaje/app-django-mysql 
+        image: wasuaje/django-mysql-kube-app
         resources:
           requests:
             cpu: 100m
