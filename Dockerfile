@@ -15,5 +15,5 @@ COPY ./manage.py ./
 
 
 EXPOSE 8080
-CMD ["python", "manage.py", "migrate"]
+RUN python manage.py migrate
 CMD ["uwsgi", "--ini", "conf.ini"]
