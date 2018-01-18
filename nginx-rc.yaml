@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginxsvc
+  labels:
+    app: test-app
+    tier: nginx
+spec:  
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: test-app
+    tier: nginx
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: my-nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-app
+        tier: nginx
+    spec:
+      volumes:      
+      - name: configmap-volume
+        configMap:
+          name: nginxconfigmap
+      containers:
+      - name: nginx
+        image: nginx:1.7.9        
+        ports:        
+        - containerPort: 8000        
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: configmap-volume
