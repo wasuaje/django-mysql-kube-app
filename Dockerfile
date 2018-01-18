@@ -8,7 +8,9 @@ RUN apt-get update \
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
-COPY ./app ./project ./conf.ini ./
+COPY ./app/ ./app/
+COPY ./project/ ./project/
+COPY ./conf.ini ./
 
 EXPOSE 8080
 CMD ["python", "manage.py", "migrate"]
