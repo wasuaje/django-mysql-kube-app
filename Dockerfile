@@ -11,6 +11,8 @@ RUN pip install -r requirements.txt
 COPY ./app/ ./app/
 COPY ./project/ ./project/
 COPY ./conf.ini ./
+COPY ./manage.py ./
+
 
 EXPOSE 8080
 CMD ["python", "manage.py", "migrate"]
