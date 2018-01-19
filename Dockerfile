@@ -16,6 +16,5 @@ COPY ./runit.sh  ./
 
 
 EXPOSE 8080
+
 CMD ["uwsgi","--ini", "conf.ini"]
-
-

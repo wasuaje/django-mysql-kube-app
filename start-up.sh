@@ -27,8 +27,6 @@
 # to expose backend
 # kubectl expose service flask-app --type=LoadBalancer --port=8080 --target-port=8080 --name=flask-exposed
 
-#kubectl exec -it backend-58f7d584f-drwtv -c app-django-mysql python manage.py migrate
-
 mkdir /tmp/data
 kubectl create secret generic mysql-pass --from-literal=password=123456qwe
 kubectl create -f mysql-deployment.yaml
