@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 
-kubectl delete secret mysql-pass
+
 kubectl delete -f mysql-deployment.yaml
-kubectl delete configmap nginxconfigmap 
-kubectl delete -f flask-deployment.yaml
+kubectl delete -f django-deployment.yaml
 kubectl delete -f nginx-rc.yaml
+kubectl delete configmap nginxconfigmap 
+kubectl delete secret mysql-pass
 cd ..
 cd heapster
 kubectl delete -f deploy/kube-config/influxdb/

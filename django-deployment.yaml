@@ -49,7 +49,17 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
-        env:
+        env:        
+        - name: DJANGO_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: username
+        - name: DJANGO_ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: password
         - name: GET_HOSTS_FROM
           value: dns
           # If your cluster config does not include a dns service, then to

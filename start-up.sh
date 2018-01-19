@@ -29,9 +29,13 @@
 
 mkdir /tmp/data
 kubectl create secret generic mysql-pass --from-literal=password=123456qwe
+kubectl create secret generic django-secret --from-literal=username='admin' --from-literal=password='El4dm1n001'
+
 kubectl create -f mysql-deployment.yaml
 kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 kubectl create -f django-deployment.yaml
 kubectl create -f nginx-rc.yaml
 
 kubectl exec -it $(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}') python manage.py migrate
+
+echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'nimda')" | python manage.py shell

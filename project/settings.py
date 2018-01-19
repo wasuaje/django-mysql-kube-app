@@ -25,7 +25,7 @@ SECRET_KEY = '05#m%tue+x8k2l7s*hk16^0l5xrd+!hwxxnle_v3oro*zalm)0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['uwsgicluster']
+ALLOWED_HOSTS = ['uwsgicluster', 'localhost']
 
 
 # Application definition
@@ -73,14 +73,21 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'mydb',
+#        'USER': 'root',
+#        'PASSWORD': '123456qwe',
+#        'HOST': 'test-app-mysql',
+#        'PORT': '3306',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': 'root',
-        'PASSWORD': '123456qwe',
-        'HOST': 'test-app-mysql',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -120,5 +127,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_ROOT = "/usr/src/app/static/"
 
 STATIC_URL = '/static/'

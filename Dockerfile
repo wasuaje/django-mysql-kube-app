@@ -12,7 +12,6 @@ COPY ./app/ ./app/
 COPY ./project/ ./project/
 COPY ./conf.ini ./
 COPY ./manage.py ./
-COPY ./runit.sh  ./
 
 
 EXPOSE 8080
