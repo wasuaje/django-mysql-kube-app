@@ -15,5 +15,4 @@ COPY ./manage.py ./
 
 
 EXPOSE 8080
-RUN python manage.py migrate
-CMD ["uwsgi", "--ini", "conf.ini"]
+ENTRYPOINT ["runit.sh"]
