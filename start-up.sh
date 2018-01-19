@@ -35,3 +35,5 @@ kubectl create -f mysql-deployment.yaml
 kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 kubectl create -f django-deployment.yaml
 kubectl create -f nginx-rc.yaml
+
+kubectl exec -it $(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}') python manage.py migrate
