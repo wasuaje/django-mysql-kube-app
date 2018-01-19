@@ -36,6 +36,9 @@ kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 kubectl create -f django-deployment.yaml
 kubectl create -f nginx-rc.yaml
 
-kubectl exec -it $(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}') python manage.py migrate
+POD=$(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
 
-echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'nimda')" | python manage.py shell
+kubectl exec -it ${POD} python manage.py migrate
+kubectl exec -it ${POD} python manage.py collectstatic
+
+kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'El4dm1n001'" | python manage.py shell
