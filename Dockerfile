@@ -15,5 +15,5 @@ COPY ./manage.py ./
 
 
 EXPOSE 8080
-
+RUN python manage.py collectstatic --noinput
 CMD ["uwsgi","--ini", "conf.ini"]
