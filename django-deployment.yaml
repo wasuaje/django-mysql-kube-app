@@ -71,9 +71,9 @@ spec:
           # name must match the volume name below
           - name: secret-volume
             mountPath: /etc/secret-volume
+        ports:
+        - containerPort: 8080      
       volumes:
       - name: secret-volume
         secret:
-          secretName: django-secret
-      ports:
-      - containerPort: 8080      
+          secretName: django-secret      
