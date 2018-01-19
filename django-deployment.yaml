@@ -74,6 +74,6 @@ spec:
       volumes:
       - name: secret-volume
         secret:
-        secretName: django-secret
-        ports:
-        - containerPort: 8080      
+          secretName: django-secret
+      ports:
+      - containerPort: 8080      
