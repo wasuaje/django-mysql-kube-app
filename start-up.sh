@@ -39,6 +39,5 @@ kubectl create -f nginx-rc.yaml
 POD=$(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
 
 kubectl exec -it ${POD} python manage.py migrate
-kubectl exec -it ${POD} python manage.py collectstatic -- --noinput
 
-kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser('admin', 'admin@example.com', 'El4dm1n001'" | python manage.py shell
+kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell

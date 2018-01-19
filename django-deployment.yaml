@@ -59,7 +59,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: django-secret
-              key: password
+              key: password      
         - name: GET_HOSTS_FROM
           value: dns
           # If your cluster config does not include a dns service, then to
@@ -67,5 +67,13 @@ spec:
           # info, comment out the 'value: dns' line above, and uncomment the
           # line below.
           # value: env
+        volumeMounts:
+          # name must match the volume name below
+          - name: secret-volume
+            mountPath: /etc/secret-volume
+      volumes:
+      - name: secret-volume
+        secret:
+        secretName: django-secret
         ports:
         - containerPort: 8080      
