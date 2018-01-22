@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '05#m%tue+x8k2l7s*hk16^0l5xrd+!hwxxnle_v3oro*zalm)0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if platform.system == 'Linux':
+if platform.system() == 'Linux':
     DEBUG = False
 else:
     DEBUG = True
@@ -131,7 +131,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-if platform.system == 'Linux':
+if platform.system() == 'Linux':
     STATIC_ROOT = "/usr/src/app/static/"
 else:
     STATIC_ROOT = "/cygdrive/i/django-test-project/project/static"
