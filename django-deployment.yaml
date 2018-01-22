@@ -72,7 +72,7 @@ spec:
           - name: secret-volume
             mountPath: /etc/secret-volume
           - name: django-persistent-storage
-            mountPath: /usr/src/app
+            mountPath: /usr/static
         ports:
         - containerPort: 8080      
       volumes:

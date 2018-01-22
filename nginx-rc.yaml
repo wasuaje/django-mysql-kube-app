@@ -47,4 +47,4 @@ spec:
         - mountPath: /etc/nginx/conf.d
           name: configmap-volume
         - name: nginx-persistent-storage
-          mountPath: /usr/src/app
+          mountPath: /usr/static
