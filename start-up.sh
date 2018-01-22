@@ -28,16 +28,15 @@
 # kubectl expose service flask-app --type=LoadBalancer --port=8080 --target-port=8080 --name=flask-exposed
 
 mkdir /tmp/data
+
 kubectl create secret generic mysql-pass --from-literal=password=123456qwe
 kubectl create secret generic django-secret --from-literal=username='admin' --from-literal=password='El4dm1n001'
-
+kubectl create -f pv-volume.yaml
 kubectl create -f mysql-deployment.yaml
 kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 kubectl create -f django-deployment.yaml
 kubectl create -f nginx-rc.yaml
 
 POD=$(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
-
 kubectl exec -it ${POD} python manage.py migrate
-
 kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell

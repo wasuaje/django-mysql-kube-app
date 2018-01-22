@@ -20,6 +20,21 @@ spec:
     tier: nginx
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-pv-claim
+  labels:
+    app: test-app
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "manual"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---      
+apiVersion: v1
 kind: ReplicationController
 metadata:
   name: my-nginx
@@ -35,6 +50,9 @@ spec:
       - name: configmap-volume
         configMap:
           name: nginxconfigmap
+      - name: nginx-persistent-storage
+        persistentVolumeClaim:
+          claimName: nginx-pv-claim   
       containers:
       - name: nginx
         image: nginx:1.7.9        
@@ -43,3 +61,5 @@ spec:
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: configmap-volume
+        - name: nginx-persistent-storage
+          mountPath: /usr/src/app

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import platform
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '05#m%tue+x8k2l7s*hk16^0l5xrd+!hwxxnle_v3oro*zalm)0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+if platform.system == 'Linux':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['uwsgicluster', 'localhost']
 
@@ -127,6 +131,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-STATIC_ROOT = "/usr/src/app/static/"
+if platform.system == 'Linux':
+    STATIC_ROOT = "/usr/src/app/static/"
+else:
+    STATIC_ROOT = "/cygdrive/i/django-test-project/project/static"
 
 STATIC_URL = '/static/'

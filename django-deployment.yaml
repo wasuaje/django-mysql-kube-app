@@ -17,6 +17,21 @@ spec:
     tier: backend
   clusterIP: None
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: django-pv-claim
+  labels:
+    app: test-app
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "manual"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -71,9 +86,14 @@ spec:
           # name must match the volume name below
           - name: secret-volume
             mountPath: /etc/secret-volume
+          - name: django-persistent-storage
+            mountPath: /usr/src/app
         ports:
         - containerPort: 8080      
       volumes:
       - name: secret-volume
         secret:
-          secretName: django-secret      
+          secretName: django-secret   
+      - name: django-persistent-storage
+        persistentVolumeClaim:
+          claimName: django-pv-claim   
