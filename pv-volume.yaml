@@ -13,3 +13,18 @@ spec:
     - ReadWriteMany
   hostPath:
     path: "/tmp/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pv-claim
+  labels:
+    app: test-app
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "manual"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi    
