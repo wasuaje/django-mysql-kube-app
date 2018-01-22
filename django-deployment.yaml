@@ -81,4 +81,4 @@ spec:
           secretName: django-secret   
       - name: django-persistent-storage
         persistentVolumeClaim:
-          claimName: django-pv-claim   
+          claimName: my-pv-claim   

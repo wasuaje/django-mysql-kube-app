@@ -37,7 +37,7 @@ spec:
           name: nginxconfigmap
       - name: nginx-persistent-storage
         persistentVolumeClaim:
-          claimName: nginx-pv-claim   
+          claimName: my-pv-claim   
       containers:
       - name: nginx
         image: nginx:1.7.9        
