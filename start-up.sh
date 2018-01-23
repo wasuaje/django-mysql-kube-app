@@ -37,9 +37,9 @@ kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 #kubectl create -f django-deployment.yaml
 #kubectl create -f nginx-rc.yaml
 kubectl create -f nginx-django-deployment.yaml
-echo "Waiting 5 second to have the containers created"
-sleep 5
-POD=$(kubectl get pods | grep nginx-django|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
+echo "Waiting 15 second to have the containers created"
+sleep 15
+export POD=$(kubectl get pods | grep nginx-django|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
 kubectl exec -it -c app-django-mysql ${POD} python manage.py migrate -- --no-input
 kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --no-input
 #kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell

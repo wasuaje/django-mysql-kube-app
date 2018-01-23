@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: django-app
   labels:
-    app: testp-app
+    app: test-app
     tier: backend
 spec:
   # if your cluster supports it, uncomment the following to automatically create

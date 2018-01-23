@@ -81,7 +81,7 @@ if not DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'mydb',
-            'USER': 'root',
+            'USER': 'myuser',
             'PASSWORD': '123456qwe',
             'HOST': 'test-app-mysql',
             'PORT': '3306',
