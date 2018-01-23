@@ -82,7 +82,7 @@ if not DEBUG:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'mydb',
             'USER': 'myuser',
-            'PASSWORD': '',
+            'PASSWORD': '123456qwe',
             'HOST': 'test-app-mysql',
             'PORT': '3306',
         }
