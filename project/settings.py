@@ -132,7 +132,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 if platform.system() == 'Linux':
-    STATIC_ROOT = "/usr/static"
+    STATIC_ROOT = "/usr/src/static"
 else:
     STATIC_ROOT = "/cygdrive/i/django-test-project/project/static"
 

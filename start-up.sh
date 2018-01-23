@@ -34,9 +34,10 @@ kubectl create secret generic django-secret --from-literal=username='admin' --fr
 kubectl create -f pv-volume.yaml
 kubectl create -f mysql-deployment.yaml
 kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
-kubectl create -f django-deployment.yaml
-kubectl create -f nginx-rc.yaml
+#kubectl create -f django-deployment.yaml
+#kubectl create -f nginx-rc.yaml
+kubectl create -f nginx-django-deployment.yaml
 
-POD=$(kubectl get pods | grep backend|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
+POD=$(kubectl get pods | grep nginx-django|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
 kubectl exec -it ${POD} python manage.py migrate
-kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell
+#kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell

@@ -1,0 +1,141 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-django
+  # these labels can be applied automatically
+  # from the labels in the pod template if not set
+  # labels:
+  #   app: guestbook
+  #   tier: nginx-django
+spec:
+  # this replicas value is default
+  # modify it according to your case
+  replicas: 2
+  # selector can be applied automatically
+  # from the labels in the pod template if not set
+  selector:
+    matchLabels:
+      app: test-app
+      tier: nginx-django
+  template:
+    metadata:
+      labels:
+        app: test-app
+        tier: nginx-django
+    spec:
+      containers:
+      - name: app-django-mysql 
+        image: wasuaje/django-mysql-kube-app
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:        
+        - name: DJANGO_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: username
+        - name: DJANGO_ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: password      
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        volumeMounts:
+          # name must match the volume name below
+          - name: secret-volume
+            mountPath: /etc/secret-volume
+          - name: shared-data
+            mountPath: /usr/src/static
+        ports:
+        - containerPort: 8080      
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: django-secret         
+      - name: shared-data
+        emptyDir: {}
+
+
+
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-django-pod
+spec:
+  selector:
+    app: test-app
+    tier: nginx-django
+  volumes:
+  - name: shared-data
+    emptyDir: {}
+  containers:
+  - name: app-django-mysql 
+        image: wasuaje/django-mysql-kube-app
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:        
+        - name: DJANGO_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: username
+        - name: DJANGO_ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: django-secret
+              key: password      
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        volumeMounts:
+          # name must match the volume name below          
+          - name: shared-data
+            mountPath: /usr/src/static
+        ports:
+        - containerPort: 8080            
+  - name: nginx
+        image: nginx:1.7.9        
+        ports:        
+        - containerPort: 8000        
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: configmap-volume
+        - name: shared-data
+          mountPath: /usr/src/static
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: LoadBalancer
+  labels:
+    app: test-app
+    tier: LoadBalancer
+spec:  
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: test-app
+    tier: LoadBalancer
