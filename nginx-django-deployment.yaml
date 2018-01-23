@@ -89,4 +89,4 @@ spec:
     name: https
   selector:
     app: test-app
-    tier: loadbalancer
+    tier: nginx-django
