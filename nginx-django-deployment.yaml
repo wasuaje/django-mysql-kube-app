@@ -49,9 +49,7 @@ spec:
           # line below.
           # value: env
         volumeMounts:
-          # name must match the volume name below
-          - name: secret-volume
-            mountPath: /etc/secret-volume
+          # name must match the volume name below          
           - name: shared-data
             mountPath: /usr/src/static
         ports:
@@ -62,7 +60,7 @@ spec:
         - containerPort: 8000        
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
-          name: configmap-volume
+          name: nginxconfigmap
         - name: shared-data
           mountPath: /usr/src/static       
       volumes:      
