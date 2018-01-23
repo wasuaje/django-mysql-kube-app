@@ -45,9 +45,9 @@ spec:
         - name: MYSQL_USER
           value: myuser
         - name: MYSQL_ROOT_HOST
-          value: %
+          value: "%"
         - name: MYSQL_HOST
-          value: %  
+          value: "%"
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
