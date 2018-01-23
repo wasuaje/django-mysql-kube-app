@@ -39,5 +39,6 @@ kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
 kubectl create -f nginx-django-deployment.yaml
 
 POD=$(kubectl get pods | grep nginx-django|tail -1|awk '{print $1}'|awk -F "/" '{print $1}')
-kubectl exec -it ${POD} python manage.py migrate
+kubectl exec -it -c app-django-mysql ${POD} python manage.py migrate -- --no-input
+kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --no-input
 #kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell
