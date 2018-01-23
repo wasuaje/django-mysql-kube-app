@@ -63,7 +63,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
           name: configmap-volume
-        - name: nginx-persistent-storage
+        - name: shared-data
           mountPath: /usr/src/static       
       volumes:      
       - name: shared-data
