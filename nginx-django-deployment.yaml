@@ -66,10 +66,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: LoadBalancer
+  name: loadbalancer
   labels:
     app: test-app
-    tier: LoadBalancer
+    tier: loadbalancer
 spec:  
   type: LoadBalancer
   ports:
@@ -82,4 +82,4 @@ spec:
     name: https
   selector:
     app: test-app
-    tier: LoadBalancer
+    tier: loadbalancer
