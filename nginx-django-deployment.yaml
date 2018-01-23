@@ -60,12 +60,15 @@ spec:
         - containerPort: 8000        
         volumeMounts:
         - mountPath: /etc/nginx/conf.d
-          name: nginxconfigmap
+          name: configmap-volume
         - name: shared-data
           mountPath: /usr/src/static       
       volumes:      
       - name: shared-data
         emptyDir: {}
+      - name: configmap-volume
+        configMap:
+          name: nginxconfigmap
 ---
 apiVersion: v1
 kind: Service
