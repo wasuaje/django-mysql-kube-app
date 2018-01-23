@@ -6,7 +6,7 @@ kubectl delete -f nginx-django-deployment.yaml
 kubectl delete -f pv-volume.yaml
 kubectl delete configmap nginxconfigmap 
 kubectl delete secret mysql-pass
-kubectl delete secret generic django-secret
+kubectl delete secret django-secret
 #cd ..
 #cd heapster
 #kubectl delete -f deploy/kube-config/influxdb/
