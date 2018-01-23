@@ -42,3 +42,5 @@ POD=$(kubectl get pods | grep nginx-django|tail -1|awk '{print $1}'|awk -F "/" '
 kubectl exec -it -c app-django-mysql ${POD} python manage.py migrate -- --no-input
 kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --no-input
 #kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell
+
+#kubectl expose pod nginx-django-747bdfcd9-cgmxs --port=80 --target-port=8000 --name=example-service --type=LoadBalancer
