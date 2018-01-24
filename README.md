@@ -1,7 +1,7 @@
 # Django-Mysql-Test-App
 
 
-This is a personal kubernetes test stack made to put practice some knowledge, this
+This is a personal kubernetes test stack made to practice some knowledge, this
 stack uses a pod with nginx and django exposed by uwsgi sharing a volumen this 
 allows nginx to serve statics while uwsgi serve dynamic content.
 
