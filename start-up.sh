@@ -46,4 +46,7 @@ done
 echo "Containers created..."
 kubectl exec -it -c app-django-mysql ${POD} python manage.py migrate -- --no-input
 kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --no-input
-#kubectl exec -it ${POD} echo "from django.contrib.auth.models import User; User.objects.filter(email='admin@example.com').delete(); User.objects.create_superuser($(cat /etc/secret-volume/username), 'admin@example.com', $(cat /etc/secret-volume/password)" | python manage.py shell
+# You can run by hand the superuser creation later
+# kubectl exec -it -c app-django-mysql ${POD} -- python manage.py createsuperuser
+#TMPMAIL=admin@example.com
+#kubectl exec -it -c app-django-mysql ${POD} echo 'from django.contrib.auth.models import User; User.objects.filter(email="$TMPMAIL").delete(); User.objects.create_superuser("$DJANGO_ADMIN_USER", "$TMPMAIL", "$DJANGO_ADMIN_PASS")' | python manage.py shell
