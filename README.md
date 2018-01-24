@@ -24,9 +24,9 @@ cd django-mysql-kube-app
 ./start-up.sh
 ```
 
-**Check pointing to a valid exposed cluster URL**
+**Check everything is runnig pointing to a valid exposed cluster URL**
 
-**Script content**
+**Start UP script content**
 ```
 mkdir /tmp/data
 
