@@ -35,8 +35,6 @@ kubectl create secret generic django-secret --from-literal=username='admin' --fr
 kubectl create -f pv-volume.yaml
 kubectl create -f mysql-deployment.yaml
 kubectl create configmap nginxconfigmap --from-file=http-nginx/default.conf
-#kubectl create -f django-deployment.yaml
-#kubectl create -f nginx-rc.yaml
 kubectl create -f nginx-django-deployment.yaml
 POD=""
 echo "Waiting for containers to  enter in Running state..."
@@ -49,7 +47,7 @@ kubectl exec -it -c app-django-mysql ${POD} python manage.py migrate -- --no-inp
 kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --no-input
 ```
 
-**Useful Commands **
+**Useful Commands**
 
 You may want to interactively add a superuser to the django install
 
