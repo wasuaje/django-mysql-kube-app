@@ -1,25 +1,29 @@
-services:
-  front:
-    image: nginx:1.7.9
-    ports:
-       - "80:80"
-    links:
-       - app:app
-    volumes:
-       - static-content:/usr/src/static
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: c4r4mb0l4
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: c4r4mb0l4
-  app:
-    build: .  
-    links:
-      - db:db
-    volumes:
-      - static-content:/usr/src/static
 
-   volumes:
-      - static-content:{}
+source:
+  image: quay.io/wunder/fuzzy-alpine-base
+  command:
+    - /bin/true
+  volumes:
+    - "/usr/src/static"
+#
+front:
+  image: nginx:1.7.9
+  ports:
+     - "80:80"
+  links:
+     - app:app
+  volumes-from:
+     - source
+db:
+  image: mysql:5.7
+  environment:
+    MYSQL_ROOT_PASSWORD: c4r4mb0l4
+    MYSQL_DATABASE: mydb
+    MYSQL_USER: myuser
+    MYSQL_PASSWORD: c4r4mb0l4
+app:
+  build: .  
+  links:
+    - db:db
+  volumes-from:
+     - source
