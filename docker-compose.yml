@@ -1,12 +1,6 @@
 
 version: "3"
-services:
-  source:
-    image: quay.io/wunder/fuzzy-alpine-base
-    command:
-      - /bin/true
-    volumes:
-      - "/usr/src/static"
+services: 
   #
   test-app-mysql:
     image: mysql:5.7
@@ -21,17 +15,28 @@ services:
   django-app:
     build: .  
     expose:
-      - "8080"
-    command: bash -c "python manage.py migrate --no-input && python manage.py collectstatic --no-input"
-    volumes_from:
-       - source
+      - "8080"    
+    volumes:
+      - type: volume
+        source: mystatic
+        target: /usr/src/static
+        volume:
+          nocopy: true
     depends_on:
        - test-app-mysql
+    command: bash -c "python manage.py migrate --no-input && python manage.py collectstatic --no-input"
   front:
     image: nginx:1.7.9
     expose:
        - "80"
     volumes:
-       - ./http-nginx:/etc/nginx/conf.d
-    volumes_from:
-       - source
+      - type: volume
+        source: mystatic
+        target: /usr/src/static
+        volume:
+          nocopy: true
+      - type: bind
+        source: ./http-nginx
+        target: /etc/nginx/conf.d    
+volumes:
+   mystatic:
