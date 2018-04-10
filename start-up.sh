@@ -50,3 +50,5 @@ kubectl exec -it -c app-django-mysql ${POD} python manage.py collectstatic -- --
 # kubectl exec -it -c app-django-mysql ${POD} -- python manage.py createsuperuser
 #TMPMAIL=admin@example.com
 #kubectl exec -it -c app-django-mysql ${POD} echo 'from django.contrib.auth.models import User; User.objects.filter(email="$TMPMAIL").delete(); User.objects.create_superuser("$DJANGO_ADMIN_USER", "$TMPMAIL", "$DJANGO_ADMIN_PASS")' | python manage.py shell
+
+#curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
