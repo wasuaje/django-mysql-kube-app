@@ -1,7 +1,6 @@
 
 version: "3.3"
 services: 
-  #
   test-app-mysql:
     image: mysql:5.7
     ports:
@@ -11,7 +10,6 @@ services:
       MYSQL_DATABASE: mydb
       MYSQL_USER: myuser
       MYSQL_PASSWORD: 123456qwe
-  #
   django-app:
     build: .  
     expose:
@@ -29,6 +27,8 @@ services:
     image: nginx:1.7.9
     expose:
        - "80"
+    depends_on:
+       - front
     volumes:
       - type: volume
         source: mystatic
