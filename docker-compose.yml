@@ -1,4 +1,6 @@
 
+version: "3"
+services:
 source:
   image: quay.io/wunder/fuzzy-alpine-base
   command:
@@ -6,24 +8,30 @@ source:
   volumes:
     - "/usr/src/static"
 #
-front:
-  image: nginx:1.7.9
-  ports:
-     - "80:80"
-  links:
-     - app:app
-  volumes-from:
-     - source
-db:
+test-app-mysql:
   image: mysql:5.7
+  ports:
+    - "3306:3306"
   environment:
     MYSQL_ROOT_PASSWORD: c4r4mb0l4
     MYSQL_DATABASE: mydb
     MYSQL_USER: myuser
-    MYSQL_PASSWORD: c4r4mb0l4
-app:
+    MYSQL_PASSWORD: 123456qwe
+#
+django-app:
   build: .  
-  links:
-    - db:db
-  volumes-from:
+  expose:
+    - "8080"
+  command: bash -c "python manage.py migrate --no-input && python manage.py collectstatic --no-input"
+  volumes_from:
+     - source
+  depends_on:
+     - test-app-mysql
+front:
+  image: nginx:1.7.9
+  expose:
+     - "80"
+  volumes:
+     - ./http-nginx:/etc/nginx/conf.d
+  volumes_from:
      - source
