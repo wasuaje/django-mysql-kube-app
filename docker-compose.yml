@@ -28,7 +28,7 @@ services:
     expose:
        - "80"
     depends_on:
-       - front
+       - django-app
     volumes:
       - type: volume
         source: mystatic
