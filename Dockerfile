@@ -12,6 +12,7 @@ COPY ./app/ ./app/
 COPY ./project/ ./project/
 COPY ./conf.ini ./
 COPY ./manage.py ./
+COPY ./wait-for-mysql ./
 
 EXPOSE 8080
 CMD ["uwsgi","--ini", "conf.ini"]

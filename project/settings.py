@@ -29,7 +29,7 @@ if platform.system() == 'Linux':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['uwsgicluster', 'localhost']
+ALLOWED_HOSTS = ['uwsgicluster', 'localhost','django-app','wasuaje.com']
 
 
 # Application definition

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mysql_ready() {
+        mysqladmin ping --host=test-app-mysql --user=root --password=MYSQL_ROOT_PASSWORD > /dev/null 2>&1
+    }
+
+    while !(mysql_ready)
+    do
+       sleep 3
+       echo "waiting for mysql ..."
+    done
