@@ -15,5 +15,5 @@ python manage.py makemigrations app --no-input
 python manage.py migrate app --no-input 
 python manage.py collectstatic --no-input
 python manage.py initadmin
-python manage.py runserver 8080
-#uwsgi --ini conf.ini
+##python manage.py runserver 8080
+uwsgi --ini conf.ini
