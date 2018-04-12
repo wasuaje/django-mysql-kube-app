@@ -18,9 +18,9 @@ from app.models import Contact, Signup
 
 class HomePageView(TemplateView):
     template_name = 'app/index.html'
-    con = Contact.objects.all()
-    sig = Signup.objects.all()
-    print(sig, con)
+    #con = Contact.objects.all()
+    #sig = Signup.objects.all()
+    #print(sig, con)
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
