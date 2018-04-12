@@ -29,7 +29,7 @@ if platform.system() == 'Linux':
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['uwsgicluster', 'localhost','django-app','wasuaje.com']
+ALLOWED_HOSTS = ['uwsgicluster', 'localhost', 'django-app', 'wasuaje.com']
 
 
 # Application definition
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [
@@ -134,6 +136,6 @@ USE_TZ = True
 if platform.system() == 'Linux':
     STATIC_ROOT = "/usr/src/static"
 else:
-    STATIC_ROOT = "/cygdrive/i/django-test-project/project/static"
+    STATIC_ROOT = "/cygdrive/i/django-mysql-kube-app/static"
 
 STATIC_URL = '/static/'
