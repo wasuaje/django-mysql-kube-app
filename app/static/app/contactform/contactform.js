@@ -7,7 +7,10 @@ jQuery(document).ready(function($) {
         var str = $(this).serialize();      
             $.ajax({
                 type: "POST",
-                url: "/signup/",
+                //dev
+                //url: "signup/",
+                //prod
+                url: "http://wasuaje.com/signup/",
                 data: str,
                 success: function(msg){
                    // alert(msg);
@@ -101,7 +104,9 @@ jQuery(document).ready(function($) {
         else var str = $(this).serialize();		
             $.ajax({
                 type: "POST",
-                url: "/contact/",
+                //url: "contact/",
+                //prod
+                url: "http://wasuaje.com/signup/",             
                 data: str,
                 success: function(msg){
                    // alert(msg);
