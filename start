@@ -1,6 +1,16 @@
 #!/bin/bash
 
 
+mysql_ready() {
+        mysqladmin ping --host=test-app-mysql --user=root --password=MYSQL_ROOT_PASSWORD > /dev/null 2>&1
+    }
+
+while !(mysql_ready)
+do
+   sleep 3
+   echo "waiting for mysql ..."
+done
+
 python manage.py makemigrations --no-input 
 python manage.py migrate --no-input 
 python manage.py collectstatic --no-input
