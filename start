@@ -11,8 +11,8 @@ do
    echo "waiting for mysql ..."
 done
 
-python manage.py makemigrations --no-input
-python manage.py migrate --no-input 
+python manage.py makemigrations app --no-input
+python manage.py migrate app --no-input 
 python manage.py collectstatic --no-input
 python manage.py initadmin
 uwsgi --ini conf.ini
