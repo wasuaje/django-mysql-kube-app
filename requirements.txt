@@ -1,4 +1,4 @@
-#mysqlclient
+mysqlclient
 uwsgi
 django
 django-bootstrap3
