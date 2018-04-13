@@ -5,12 +5,12 @@ mysql_ready() {
         mysqladmin ping --host=test-app-mysql --user=root --password=MYSQL_ROOT_PASSWORD > /dev/null 2>&1
     }
 
-#while !(mysql_ready)
-#do
-#   sleep 10
-#   echo "waiting for mysql to continue..."
-#done
-sleep 10
+while !(mysql_ready)
+do
+   sleep 5
+   echo "waiting for mysql to continue..."
+done
+
 
 python manage.py makemigrations app --no-input
 python manage.py migrate app --no-input 
