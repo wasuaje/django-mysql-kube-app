@@ -1,3 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
+from app.models import Contact, Signup
+
+
+class ContactAdmin(admin.ModelAdmin):
+    pass
+
+
+class SignupAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Signup, SignupAdmin)
