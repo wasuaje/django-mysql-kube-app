@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
                 //dev
                 //url: "signup/",
                 //prod
-                url: "http://wasuaje.com/signup/",
+                url: "//wasuaje.com/signup/",
                 data: str,
                 success: function(msg){
                    // alert(msg);
@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
                 type: "POST",
                 //url: "contact/",
                 //prod
-                url: "http://wasuaje.com/signup/",             
+                url: "//wasuaje.com/signup/",             
                 data: str,
                 success: function(msg){
                    // alert(msg);
