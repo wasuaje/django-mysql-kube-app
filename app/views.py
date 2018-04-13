@@ -56,7 +56,7 @@ def signup(request):
     mess = ''
     if request.method == 'POST':
         # Code block for POST request
-        email = request.POST["exampleInputEmail1"]
+        email = request.POST["email2"]
         con = Signup(email=email)
         con.save()
         if con.pk:
