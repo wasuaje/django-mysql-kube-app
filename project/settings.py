@@ -75,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-if not DEBUG:
+if platform.system() == 'Linux':
     # Database
     # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
