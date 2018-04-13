@@ -7,8 +7,8 @@ mysql_ready() {
 
 while !(mysql_ready)
 do
-   sleep 3
-   echo "waiting for mysql ..."
+   sleep 5
+   echo "waiting for mysql to continue..."
 done
 
 python manage.py makemigrations app --no-input
