@@ -106,7 +106,7 @@ jQuery(document).ready(function($) {
                 type: "POST",
                 //url: "contact/",
                 //prod
-                url: "//wasuaje.com/signup/",             
+                url: "//wasuaje.com/contact/",             
                 data: str,
                 success: function(msg){
                    // alert(msg);
