@@ -7,7 +7,7 @@ mysql_ready() {
 
 while !(mysql_ready)
 do
-   sleep 5
+   sleep 10
    echo "waiting for mysql to continue..."
 done
 
